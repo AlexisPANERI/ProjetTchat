@@ -15,10 +15,9 @@ if(isset($_POST['username'] ) && isset($_POST['pswd'])){
             // Ne PAS OUBLIER DE FAIRE UN BOUTON DE RENVOIE DE MAIL
         header("location: ../index.php");
         die();
-    }else {
+    } else {
         $_SESSION['auth'] = $user;
-        $_SESSION['success'] = "Vous êtes maintenant connecté";
-        header("location: ../index.php");
+        header("location: read.php");
         die();
     }
 }

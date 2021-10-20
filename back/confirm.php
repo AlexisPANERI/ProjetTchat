@@ -1,5 +1,4 @@
 <?php
-    
     if(isset($_GET['token'])) {
         $user_id = $_GET['id'];
         $token = $_GET['token'];
@@ -10,13 +9,12 @@
         $user = $user->token_conf;
         session_start();
         if($user == $token){
-            $pdo->prepare("UPDATE users SET token_conf = NULL, date_creation = NOW() WHERE user_id = $user_id")->execute();
+            $pdo->prepare("UPDATE users SET token_conf = NULL, date_creation = NOW() WHERE user_id = $user_id; INSERT INTO profile SET user_id = $user_id")->execute();
             $_SESSION['success'] = "Votre compte a été créé";
             header("location: ../index.php");
             die();
         }
     }
-
 ?>
 
 <!DOCTYPE html>

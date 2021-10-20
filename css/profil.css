@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #193250;
+    height: 100vh;
+}
+
+fieldset {
+    border: none;
+    background: #fff;
+    width: 420px;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+span {color: black;}
+
+#avatar{
+    background: #fff;
+    background: url(../img/avatar.png);
+    background-size: cover;
+    background-position: center;
+    margin: 0 auto;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+}
+
+#avatar:hover{
+    transform: scale(1.02);
+}
+
+.text{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    margin: 0 2em;
+}
+
+.text div {
+    margin: 5px 0;
+}
+
+img{
+    opacity: 0;
+}
+
+img:hover{
+    opacity:0.7;
+}
+
+.boutons {
+    position: relative;
+    bottom: 0;
+}
+
+input,select{
+    float: right;
+}
+
+textarea{
+    resize: none;
+}
+
+/* CHAMPS DES BOUTONS */
+.input{
+    text-align: center;
+}
+
+input[type="button"]{
+    background: #007BFF;;
+}
+
+input[type="submit"]{
+    background: #28A745;
+}
+
+input[type="submit"],input[type="button"]{
+    float: none;
+    border: none;
+    border-radius: 2px;
+    padding: 1em 1.5em;
+    margin: 1em auto;
+    color: white;
+}
+
+input[type="password"]{
+    float: none;
+    border: none;
+    border-bottom: 2px black solid;
+    border-radius: 2px;
+    padding: 1em 1.5em;
+    margin: 1em auto;
+}

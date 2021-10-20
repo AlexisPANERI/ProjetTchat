@@ -19,7 +19,6 @@
             echo "<div class=\"successPHP\">".$_SESSION['success']."</div>";
             unset($_SESSION['success']);
         }
-
     ?>
     <div class="container">
         <div class="bluebg">
@@ -34,7 +33,7 @@
         </div>
         <div class="formBx">
             <div class="form signinForm">
-                <form action="back/connexion.php" method="POST">
+                <form action="back/connection.php" method="POST">
                     <h3>Connectez vous</h3>
                     <input type="text" name="username" placeholder="Nom d'utilisateur">
                     <input type="password" name="pswd" placeholder="Mot de passe">
@@ -44,7 +43,7 @@
             </div>
 
             <div class="form signupForm">
-                <form action="back/inscription.php" method="POST">
+                <form action="back/register.php" method="POST">
                     <h3>Inscrivez vous</h3>
                     <span class="consigne">Votre nom d'utilisateur doit être compris entre 4 à 16 caractères</span>
                     <input id="inscr_nom" type="text" name="username" placeholder="Nom d'utilisateur">
