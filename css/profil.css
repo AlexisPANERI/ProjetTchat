@@ -26,9 +26,17 @@ span {color: black;}
 
 #avatar{
     background: #fff;
-    background: url(../img/avatar.png);
+    background-image: url(../img/avatar.png);
     background-size: cover;
     background-position: center;
+    margin: 0 auto;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+}
+
+#avatarRead{
     margin: 0 auto;
     border-radius: 50%;
     width: 200px;
@@ -52,11 +60,11 @@ span {color: black;}
     margin: 5px 0;
 }
 
-img{
+#output{
     opacity: 0;
 }
 
-img:hover{
+#output:hover{
     opacity:0.7;
 }
 
@@ -102,4 +110,71 @@ input[type="password"]{
     border-radius: 2px;
     padding: 1em 1.5em;
     margin: 1em auto;
+}
+
+
+.errorPHP {
+    color: red;
+}
+
+
+.delete{
+    cursor: pointer;
+    color: #c62828 ;
+}
+
+/* POP UP COMPTE */
+
+#popup {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(94, 110, 141, 0.9);
+}
+
+.popupcontainer{
+    position: relative;
+    top: 36%;
+    left: 50%;
+    width: 600px;
+    transform: translateX(-50%);
+    background-color: white;
+    border-radius: .2rem .2rem 0 0;
+}
+
+.popupcontainer p {
+
+    color: #8f9cb5;
+    padding: 2em 0;
+}
+
+#popup a {
+    padding: 1.5em 0;
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+#popup li:hover{
+    opacity: 0.9;
+}
+ul{
+    list-style: none;
+}
+li{
+    float: left;
+    width: 50%;
+}
+
+li:first-child a{
+    background: #c62828 ;
+    border-radius: 0 0 0 .25em;
+}
+
+li:last-child a{
+    background: #3949ab ;
+    border-radius: 0 0 .25em 0;
 }

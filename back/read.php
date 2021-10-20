@@ -6,6 +6,7 @@
         $req = $pdo->prepare("SELECT * FROM profile WHERE user_id = $user_id ");
         $req->execute([$user_id]);
         $user = $req->fetch();
+        $path = "../avatar/";
     } else {
         header("location: ../index.php");
         die();
@@ -24,7 +25,7 @@
 </head>
 <body>
     <fieldset class="container">
-        <legend id="avatar"><img src="../avatar.png" alt=""></legend>
+        <legend id="avatar" style="background-image: url(<?php if($user->avatar != null){echo "'".$path.$user->avatar."'";} else {echo "../img/avatar.png";}  ?>);"></legend>
         <div class="text">
             <div><b>Pseudo : </b><span><?php echo $user->pseudo ?></span></div>
             <div><b>Âge : </b><span><?php echo $user->age ?></span></div>

@@ -6,25 +6,42 @@
         $req = $pdo->prepare("SELECT * FROM profile WHERE user_id = $user_id ");
         $req->execute([$user_id]);
         $user = $req->fetch();
+        $path = "../avatar/";
         if(!empty($_POST['password'])){
             if(password_verify($_POST['password'], $_SESSION['auth']->pswd)){
-                $pseudo = $_POST['pseudo'];
-                $age = $_POST['age'];
-                $gender = $_POST['gender'];
-                $location = $_POST['location'];
-                $description = $_POST['description'];
-                $req = $pdo->prepare("UPDATE profile SET pseudo = ?, age = ?, gender = ?, location = ?, description = ? WHERE user_id = $user_id");
-                $req->execute([$pseudo,$age,$gender,$location,$description]);
+                if (!empty($_FILES["profilAvatar"])) {
+                    $taillemax = 2097152;
+                    $entensionsValides = array('jpg', 'jpeg', 'gif', 'png');
+                    $extensionUpload = strtolower(substr(strrchr($_FILES['profilAvatar']['name'], '.'), 1));
+                    if($_FILES['profilAvatar']['size'] <= $taillemax && in_array($extensionUpload, $entensionsValides)){
+                        $avatar = $user->profile_id.trim(filter_var($_FILES["profilAvatar"]['name'], FILTER_SANITIZE_STRING));
+                        $path = "../avatar/" .$avatar;
+                        $move = move_uploaded_file($_FILES['profilAvatar']['tmp_name'],$path);
+                    } else {
+                        $avatar = $user->avatar;
+                    }
+                }
+                if (!empty($_POST["pseudo"])) {$pseudo = filter_var($_POST["pseudo"], FILTER_SANITIZE_STRING);} else {$pseudo = $user->pseudo;}
+                if (!empty($_POST["age"])) {$age = filter_var($_POST["age"], FILTER_SANITIZE_NUMBER_INT);} else {$age = $user->age;}
+                if (!empty($_POST["gender"])) {$gender = filter_var($_POST["gender"], FILTER_SANITIZE_STRING);} else {$gender = $user->gender;}
+                if (!empty($_POST["location"])) {$location = filter_var($_POST["location"], FILTER_SANITIZE_STRING);} else {$location = $user->location;}
+                $description = filter_var($_POST["description"], FILTER_SANITIZE_STRING);
+                $req = $pdo->prepare("UPDATE profile SET avatar = ?, pseudo = ?, age = ?, gender = ?, location = ?, description = ? WHERE user_id = $user_id");
+                $req->execute([$avatar,$pseudo,$age,$gender,$location,$description]);
+                header("location: read.php");
+                die();
             }
         }
     }else{
-        header("location: ../index.php");
+        header("location: read.php");
         die();
     }
 ?>
 
+
 <?php 
 $loc = '<select name="location">
+            <option value="" selected>Je suis de proche de</option>
             <option value="bourg">Bour-en-Bresse (01)</option>
             <option value="laon">Laon (02)</option>
             <option value="moulins">Moulins (03)</option>
@@ -133,29 +150,59 @@ $loc = '<select name="location">
     <title>Profil - Modification</title>
 </head>
 <body>
-    <form action="update.php" method="POST">
+    <form action="update.php" method="POST" enctype="multipart/form-data">
         <fieldset>
-            <legend id="avatar">
+            <legend id="avatar" style="background-image: url(<?php if($user->avatar != null){echo "'".$path.$user->avatar."'";} else {echo "../img/avatar.png";}  ?>);">
                 <label> 
-                    <img id="output" src="../img/modifAvatar.png" style="width: auto;">
-                    <input type="file" name="profilAvatar" id="ava" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])" style="display:none">
+                    <img id="output" name="avatar" src="../img/modifAvatar.png" style="width: auto;">
+                    <input type="file" name="profilAvatar" id="ava" onchange="document.getElementById('avatar').style.backgroundImage = 'url' +'(' + window.URL.createObjectURL(this.files[0]) + ')';" style="display:none">
                 </label>
             </legend>
             <div class="text">
                 <div><b>Pseudo : </b><input type="text" name="pseudo" value="<?php echo $user->pseudo ?>"></div>
-                <div><b>Âge : </b><input type="number"  name="age" value="<?php echo $user->age ?>"></div>
-                <div><b>Genre : </b><select name="gender"><option value="man">Homme</option><option value="woman">Femme</option><option value="other">Non précisé</option></select></div>
+                <div><b>Âge : </b><input type="number" min="8" name="age" value="<?php echo $user->age ?>"></div>
+                <div><b>Genre : </b>
+                    <select name="gender">
+                        <option value="" selected>Je suis un(e)</option>
+                        <option value="Homme">Homme</option>
+                        <option value="Femme">Femme</option>
+                        <option value="Non précisé">Non précisé</option>
+                    </select>
+                </div>
                 <div><b>Localisation : </b><?php echo $loc ?></div>
                 <b>Description : </b>
                 <textarea  name="description" maxlength="255" rows="6" cols="30" style="resize:none;"></textarea>
             </div>
             <div class="input">
-                <input type="password" name="password" placeholder="Mot de passe"><br>
+                <?php
+                if(isset($_SESSION['error'])){
+                    echo "<div class=\"errorPHP\">".$_SESSION['error']."</div>";
+                    unset($_SESSION['error']);
+                }
+                ?>
+                <input type="password" name="password" placeholder="Mot de passe"><br/>
                 <a href="read.php"><input type="button" value="Retour"></a>
-                <input type="submit" value="Confirmer">
+                <input type="submit" value="Confirmer"><br/>
+                <p class="delete" onclick="popup()">Supprimer ce compte</p>
+                <div id="popup">
+                    <div class="popupcontainer">
+                        <p>Voulez-vous vraiment supprimer votre compte ?</p>
+                        <ul>
+                            <li><a href="delete.php">OUI</a></li>
+                            <li><a href="update.php">NON</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </fieldset>
     </form>
+
+
+    <script>
+        function popup() {
+            document.getElementById("popup").style.display = "block";
+        }
+    </script>
 </body>
 
 </html>  
