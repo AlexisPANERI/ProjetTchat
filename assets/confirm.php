@@ -2,7 +2,7 @@
     if(isset($_GET['token'])) {
         $user_id = $_GET['id'];
         $token = $_GET['token'];
-        require_once 'bdd.php';
+        require_once '../common/inc/db.php';
         $req = $pdo->prepare("SELECT token_conf FROM users WHERE user_id = ?");
         $req->execute([$user_id]);
         $user = $req->fetch();
@@ -23,6 +23,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../common/css/style.css">
     <title>Confirmation</title>
 </head>
 <body>

@@ -1,8 +1,8 @@
 
 <?php 
 session_start();
-require_once 'function.php';
-require_once 'bdd.php';
+require_once '../common/inc/functions.php';
+require_once '../common/inc/db.php';
     // Vérifie si le formulaire est vide ou pas
     if(!empty($_POST['validation'])){
         $username = filter_var($_POST["username"], FILTER_SANITIZE_STRING); // Variable qui prend la valeur du champ nom
@@ -20,7 +20,7 @@ require_once 'bdd.php';
         } else if(strlen($username) < 3 && strlen($username) > 17){ // Vérifie si le nom est compris entre 4 et 16 caractères
             $_SESSION["error"] = "Le nom doit être compris entre 4 et 16 caractères"; // Message d'erreur
             header("location: ../index.php");
-        } else if(!preg_match($regexUser, $username)){         // Vérifie si le nom correspon au pattern
+        } else if(!preg_match($regexUser, $username)){         // Vérifie si le nom correspond au pattern
             $_SESSION["error"] = "Nom d'utilisateur invalide"; // Message d'erreur
             header("location: ../index.php");
             die();
@@ -73,21 +73,21 @@ require_once 'bdd.php';
         }
 
         $token = str_random(60); //Genère un token de 60 caractères
-
-        $req = $pdo->prepare("INSERT INTO users SET email = ?, username = ?,  pswd = ?, token_conf = ?");
+echo "ok";
+        $req = $pdo->prepare("INSERT INTO users SET email = ?, username = ?,  pswd = ?, token_conf = ?,roles='membre'");
         $req->execute([$email, $username, $pswd, $token]);
         $req = $pdo->prepare('SELECT user_id FROM users where username = ?');
         $req->execute([$username]);
         $user = $req->fetch();
         $user_id = $user->user_id ;
-        $message = "Merci de vous être enregistré, pour finaliser l'inscription, veuillez cliquer sur le lien ci-dessous<br/>" . "<a href=\"http://localhost/ConnexionInscription/back/confirm.php?token=$token&id=$user_id\">Confirmer votre compte</a>\">Compte</a>";      
+        $message = "Merci de vous être enregistré, pour finaliser l'inscription, veuillez cliquer sur le lien ci-dessous<br/>" . "<a href=\"http://localhost/ConnexionInscription/assets/confirm.php?token=$token&id=$user_id\">Confirmer votre compte</a>\">Compte</a>";      
         $fp = fopen('mail.txt','a+'); 
             fwrite($fp, "$email,$message\n");
             fclose($fp);
-        $_SESSION['success'] = "Compte créer ✔ "."<a href=\"http://localhost/ConnexionInscription/back/confirm.php?token=$token&id=$user_id\" style=\"color:white;\">Confirmer</a>";
+        $_SESSION['success'] = "Compte créer ✔ "."<a href=\"http://localhost/ConnexionInscription/assets/confirm.php?token=$token&id=$user_id\" style=\"color:white;\">Confirmer</a>";
         header("location: ../index.php");
+        echo "ok";
         die();
-
     } else {
         $_SESSION["error"] = "Veuillez remplir le formulaire"; // Message d'erreur
         header("location: ../index.php");

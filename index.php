@@ -1,11 +1,11 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="style.css" rel="stylesheet">
+    <link href="common/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
     <title>Connexion - Inscription</title>
 </head>
 
@@ -21,7 +21,7 @@
         }
     ?>
     <div class="container">
-        <div class="bluebg">
+        <div class="container2">
             <div class="box signin">
                 <h2>Déjà Inscrit ?</h2>
                 <button class="signinBtn">Connectez vous</button>
@@ -33,32 +33,50 @@
         </div>
         <div class="formBx">
             <div class="form signinForm">
-                <form action="back/connection.php" method="POST">
+                <form action="assets/login.php" method="POST">
                     <h3>Connectez vous</h3>
-                    <input type="text" name="username" placeholder="Nom d'utilisateur">
-                    <input type="password" name="pswd" placeholder="Mot de passe">
+                    <div class="fields">
+                        <input type="text" name="username" placeholder="Nom d'utilisateur">
+                        <i class="fa fa-user fa-lg"></i>
+                    </div>
+                    <div class="fields">
+                        <input type="password" name="pswd" placeholder="Mot de passe">
+                        <i class="fas fa-lock fa-lg"></i>                 
+                    </div>
                     <input type="submit" value="Se connecter">
-                    <a href="#" class="forgot">Mot de passe oublié</a>
+                    <a href="assets/reset.php" class="forgot">Mot de passe oublié ?</a>
                 </form>
             </div>
 
             <div class="form signupForm">
-                <form action="back/register.php" method="POST">
+                <form action="assets/signup.php" method="POST">
                     <h3>Inscrivez vous</h3>
-                    <span class="consigne">Votre nom d'utilisateur doit être compris entre 4 à 16 caractères</span>
-                    <input id="inscr_nom" type="text" name="username" placeholder="Nom d'utilisateur">
-                    <span class="alertError" id="errorUsername"></span>
-                    <span class="consigne">Le format de votre email doit être conforme au format standard</span>
-                    <input id="inscr_email" type="email" name="email" placeholder="Adresse Email">
+                    <!-- <span class="consigne">Votre nom d'utilisateur doit être compris entre 4 à 16 caractères</span> -->
+                    <div class="fields">
+                        <input id="inscr_nom" type="text" name="username" placeholder="Nom d'utilisateur">
+                        <i class="fa fa-user fa-lg"></i>
+                    </div>
+                    <span class="alertError" id="errorUsername"></span>                   
+                    <!-- <span class="consigne">Le format de votre email doit être conforme au format standard</span> -->
+                    <div class="fields">
+                        <input id="inscr_email" type="email" name="email" placeholder="Adresse Email">
+                        <i class="fas fa-envelope fa-lg"></i>
+                    </div>
                     <span class="alertError" id="errorEmail"></span>
-                    <span class="consigne">Votre mot de passe doit être compris entre 8 à 16 caractères</span>
-                    <input id="inscr_mdp" type="password" name="pswd" placeholder="Mot de passe">
+                    <!-- <span class="consigne">Votre mot de passe doit être compris entre 8 à 16 caractères</span> -->
+                    <div class="fields">
+                        <input id="inscr_mdp" type="password" name="pswd" placeholder="Mot de passe">
+                        <i class="fas fa-lock fa-lg"></i>
+                    </div>
                     <span class="alertError" id="errorPswd"></span>
-                    <span class="consigne">Le mot de passe doit être identique</span>
-                    <input id="inscr_confirm" type="password" name="pswdConf" placeholder="Confirmer Mot de passe">
+                    <!-- <span class="consigne">Le mot de passe doit être identique</span> -->
+                    <div class="fields">
+                        <input id="inscr_confirm" type="password" name="pswdConf" placeholder="Confirmer Mot de passe">
+                        <i class="fas fa-lock fa-lg"></i>                        
+                    </div>
                     <span class="alertError" id="errorPswdConf"></span>
                     <input type="text" id="validation" value="" name="validation" hidden>
-                    <input type="submit" onClick="return controleChamps()" value="S'inscrire">
+                    <input type="submit" onclick="return controleChamps()" value="S'inscrire">
                 </form>
             </div>
         </div>

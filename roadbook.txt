@@ -1,0 +1,58 @@
+To do :
+
+- page d'accueil avec présentation du tchat et des fonctionnalités, avec des captures du tchat.
+
+
+- mode nuit
+- mot de passe oublié
+- renvoi de mail via bouton si email non confirmé avant connexion
+- se souvenir de modi
+- tchat vocal en v2 ?
+- plusieurs utilisateurs avec le même pseudo mais pas le même index
+
+
+semaine du 18/10 → :
+- reset.php
+- remember me ?
+- hub.php
+
+
+************************************************************************************************************************************
+
+Objet :	    création d'une interface d'inscription / connexion avec effet de glissement d'un formulaire à l'autre sur la même page.
+
+
+
+etape 1 :   creation des fichiers index.php et style.css
+            production en html des 2 forms dédiés à la connexion et à l'inscription.
+
+etape 2 :   production du css pour appliquer le style.
+		. paramétrage d'une page responsive via un média query.
+
+etape 3 :   production du script Js dans l'index.php pour animer les 2 forms au clic sur les champs "inscrivez vous" et "connectez vous".
+		. definition des constantes liées au clic sur les boutons.
+		. creation des 2 fonctions liées à l'animation "aller" et "retour" entre les 2 forms.
+		
+etape 4 :   production du script Js liée à la vérification de chaque champ.
+		. definition d'une fonction liée au contrôle "controleChamps()".
+		. déclaration d'une variable "error" sous forme d'array ayant des clés liées à chaque message d'erreur généré si un champ ne respecte pas le cadre défini.
+		. déclaration de 2 variables associées aux regex Js de contrôle des caractères et formats employés pour les champs "Nom d'utilisateur" et "email".
+		. définition des 2 regex Js.
+
+		. contrôles Js :
+			- contrôle du Nom d'utilisateur
+			  	→ champs vide.
+				→ format de Nom adapté au cadre défini (4 à 16 caractères) en utilisant la variable regexUser déclarée en amont. 
+
+			- contrôle de l'Email
+				→ champs vide.
+				→ format de l'Email adapté au cadre défini en utilisant la variable regexEmail déclarée en amont.
+
+			- contrôle du mot de passe
+				→ champs vide.
+				→ format du mot de passe adapté au cadre défini (8 à 24 caractères).
+				→ concordance avec la confirmation de mot de passe.
+
+etape 5 :   	. si tous les champs sont correctement renseignés, envoi du formulaire. 
+		. sinon affichage des messages d'erreur personnalisés via la variable "error".
+		. puis suppression des messages après modif par l'utilisateur.

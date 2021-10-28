@@ -1,12 +1,12 @@
 <?php 
     session_start();
     if($_SESSION['auth']){
-        require_once "bdd.php";
+        require_once "inc/db.php";
         $user_id = $_SESSION['auth']->user_id;
         $req = $pdo->prepare("SELECT * FROM profile WHERE user_id = $user_id ");
         $req->execute([$user_id]);
         $user = $req->fetch();
-        $path = "../avatar/";
+        $path = "media/avatar/";
         if(!empty($_POST['password'])){
             if(password_verify($_POST['password'], $_SESSION['auth']->pswd)){
                 if (!empty($_FILES["profilAvatar"])) {
@@ -15,7 +15,7 @@
                     $extensionUpload = strtolower(substr(strrchr($_FILES['profilAvatar']['name'], '.'), 1));
                     if($_FILES['profilAvatar']['size'] <= $taillemax && in_array($extensionUpload, $entensionsValides)){
                         $avatar = $user->profile_id.trim(filter_var($_FILES["profilAvatar"]['name'], FILTER_SANITIZE_STRING));
-                        $path = "../avatar/" .$avatar;
+                        $path = "media/avatar/" .$avatar;
                         $move = move_uploaded_file($_FILES['profilAvatar']['tmp_name'],$path);
                     } else {
                         $avatar = $user->avatar;
@@ -146,15 +146,15 @@ $loc = '<select name="location">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/profil.css">
+    <link rel="stylesheet" href="css/profil.css">
     <title>Profil - Modification</title>
 </head>
 <body>
     <form action="update.php" method="POST" enctype="multipart/form-data">
         <fieldset>
-            <legend id="avatar" style="background-image: url(<?php if($user->avatar != null){echo "'".$path.$user->avatar."'";} else {echo "../img/avatar.png";}  ?>);">
+            <legend id="avatar" style="background-image: url(<?php if($user->avatar != null){echo "'".$path.$user->avatar."'";} else {echo "media/sources/avatar.png";}  ?>);">
                 <label> 
-                    <img id="output" name="avatar" src="../img/modifAvatar.png" style="width: auto;">
+                    <img id="output" name="avatar" src="media/sources/modifAvatar.png" style="width: auto;">
                     <input type="file" name="profilAvatar" id="ava" onchange="document.getElementById('avatar').style.backgroundImage = 'url' +'(' + window.URL.createObjectURL(this.files[0]) + ')';" style="display:none">
                 </label>
             </legend>
@@ -171,24 +171,19 @@ $loc = '<select name="location">
                 </div>
                 <div><b>Localisation : </b><?php echo $loc ?></div>
                 <b>Description : </b>
-                <textarea  name="description" maxlength="255" rows="6" cols="30" style="resize:none;"></textarea>
+                <textarea  name="description" maxlength="255" rows="6" cols="30" style="resize:none;" ><?php echo $user->description ?></textarea>
             </div>
             <div class="input">
-                <?php
-                if(isset($_SESSION['error'])){
-                    echo "<div class=\"errorPHP\">".$_SESSION['error']."</div>";
-                    unset($_SESSION['error']);
-                }
-                ?>
-                <input type="password" name="password" placeholder="Mot de passe"><br/>
+                <input type="password" name="password" id="pswd" placeholder="Mot de passe"><br/>
+                <span class="alertError" id="errorPswd"></span>
                 <a href="read.php"><input type="button" value="Retour"></a>
-                <input type="submit" value="Confirmer"><br/>
+                <input type="submit" onclick="return controlePassword()"  value="Confirmer"><br/>
                 <p class="delete" onclick="popup()">Supprimer ce compte</p>
                 <div id="popup">
                     <div class="popupcontainer">
                         <p>Voulez-vous vraiment supprimer votre compte ?</p>
                         <ul>
-                            <li><a href="delete.php">OUI</a></li>
+                            <li><a href="../assets/delete.php">OUI</a></li>
                             <li><a href="update.php">NON</a></li>
                         </ul>
                     </div>
@@ -196,13 +191,16 @@ $loc = '<select name="location">
             </div>
         </fieldset>
     </form>
-
-
+    <script>function popup() {document.getElementById("popup").style.display = "block";}</script>
     <script>
-        function popup() {
-            document.getElementById("popup").style.display = "block";
+        function controlePassword() {
+            let pswd = document.getElementById("pswd").value;
+            if (pswd == "") {
+                document.getElementById('errorPswd').innerHTML="Veuillez confirmer votre mot de passe";
+                document.getElementById('errorPswd').style.display="block";
+                return false;
+            } document.getElementById('errorPswd').style.display="none";   
         }
     </script>
 </body>
-
 </html>  

@@ -10,14 +10,16 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #193250;
+    background-color: rgba(94, 110, 141, 0.9);
     height: 100vh;
 }
+
+a{text-decoration: none;}
 
 fieldset {
     border: none;
     background: #fff;
-    width: 420px;
+    width: 400px;
     padding: 1rem;
     border-radius: 5px;
 }
@@ -26,7 +28,7 @@ span {color: black;}
 
 #avatar{
     background: #fff;
-    background-image: url(../img/avatar.png);
+    background-image: url(../media/sources/avatar.png);
     background-size: cover;
     background-position: center;
     margin: 0 auto;
@@ -75,6 +77,10 @@ span {color: black;}
 
 input,select{
     float: right;
+    border: none;
+    border-bottom: 1px solid rgb(75, 72, 72);
+    text-align: center;
+    width: 185px;
 }
 
 textarea{
@@ -87,10 +93,12 @@ textarea{
 }
 
 input[type="button"]{
+    cursor: pointer;
     background: #007BFF;;
 }
 
 input[type="submit"]{
+    cursor: pointer;
     background: #28A745;
 }
 
@@ -101,6 +109,10 @@ input[type="submit"],input[type="button"]{
     padding: 1em 1.5em;
     margin: 1em auto;
     color: white;
+}
+
+input[type="submit"]:hover,input[type="button"]:hover{
+    opacity: 0.9;
 }
 
 input[type="password"]{
@@ -117,9 +129,19 @@ input[type="password"]{
     color: red;
 }
 
+.alertError{
+    color: red;
+    padding-left: 5px;
+    margin-top: -10px;
+    font-size: 0.9em;
+}
 
 .delete{
     cursor: pointer;
+    color: #c62828 ;
+}
+
+.logout{
     color: #c62828 ;
 }
 

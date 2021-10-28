@@ -1,7 +1,7 @@
 <?php
 if(isset($_POST['username'] ) && isset($_POST['pswd'])){
     session_start();
-    require_once "bdd.php";
+    require_once "../common/inc/db.php";
     $username = $_POST['username'];
     $req = $pdo->prepare("SELECT * FROM users WHERE username = ?");
     $req->execute([$username]);
@@ -17,7 +17,7 @@ if(isset($_POST['username'] ) && isset($_POST['pswd'])){
         die();
     } else {
         $_SESSION['auth'] = $user;
-        header("location: read.php");
+        header("location: ../common/read.php");
         die();
     }
 }
