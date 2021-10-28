@@ -47,19 +47,19 @@
                     <span class="addRoom" onclick="popup()">Ajouter +</span>
                 </div>
             </div>
-            <div class="rooms">
+            <div class="rooms"hidden>
                 <div class="roomsBar">
                     <div class="roomsImg" style="background-image:url(media/sources/imgGroup.jpg);"></div>
                         <div class="roomsInfos">
                             <div><b>NOM DU SALON</b></div>
-                            <p class="roomsLastMsg">Jean: Salut à tous, vous allez bien ?</p>
+                            <p class="roomsLastMsg">Max: Salut à tous, vous allez bien ?</p>
                         </div>
                 </div>
                 <div class="roomsBar">
                     <div class="roomsImg" style="background-image:url(media/sources/imgGroup.jpg);"></div>
                         <div class="roomsInfos">
                             <div><b>NOM DU SALON</b></div>
-                            <p class="roomsLastMsg">Jean: Salut à tous, vous allez bien ?</p>
+                            <p class="roomsLastMsg">Max: Salut à tous, vous allez bien ?</p>
                         </div>
                 </div>
                 <div class="roomsBar">
@@ -73,27 +73,27 @@
                     <div class="roomsImg" style="background-image:url(media/sources/imgGroup.jpg);"></div>
                         <div class="roomsInfos">
                             <div><b>NOM DU SALON</b></div>
-                            <p class="roomsLastMsg">Jean: Salut à tous, vous allez bien ?</p>
+                            <p class="roomsLastMsg">Max: Salut à tous, vous allez bien ?</p>
                         </div>
                 </div>
                 <div class="roomsBar">
                     <div class="roomsImg" style="background-image:url(media/sources/imgGroup.jpg);"></div>
                         <div class="roomsInfos">
                             <div><b>NOM DU SALON</b></div>
-                            <p class="roomsLastMsg">Jean: Salut à tous, vous allez bien ?</p>
+                            <p class="roomsLastMsg">Max: Salut à tous, vous allez bien ?</p>
                         </div>
                 </div>
                 <div class="roomsBar">
                     <div class="roomsImg" style="background-image:url(media/sources/imgGroup.jpg);"></div>
                         <div class="roomsInfos">
                             <div><b>NOM DU SALON</b></div>
-                            <p class="roomsLastMsg">Jean: Salut à tous, vous allez bien ?</p>
+                            <p class="roomsLastMsg">Max: Salut à tous, vous allez bien ?</p>
                         </div>
                 </div>
             </div>
         </div>
         <div class="main"></div>
-        <div class="roomInfos">
+        <div class="roomInfos" hidden>
             <div><h2>SCORD</h2></div>
             <div class="roomImg"></div>
             <p>Je suis la description du salon, vous pouvez me modifier en cliquant sur moi</p>
@@ -105,30 +105,110 @@
             </div>
         </div>
     </main>
+    //Création d'un salon
     <div id="popup">
         <div class="popupcontainer">
-            <form action="">
-            <div id="imgGroup" style="background-image: url(<?php if($user->conv_img != null){echo "'".$path.$user->conv_img."'";} else {echo "media/sources/imgGroup.jpg";}  ?>);"></div>
+            <span  class="redalert" id="errorRoomName"></span>
+            <span class="redalert" id="errorRoomPswd"></span>
+            <form action="ajax/create.php" method="POST" id="room-create">
+                <div name="room-create__img" id="room-create__img" style="background-image: url(<?php if($user->conv_img != null){echo "'".$path.$user->conv_img."'";} else {echo "media/sources/imgGroup.jpg";}?>);">
+                    <label> 
+                        <img id="output" name="imgGroupMask" src="media/sources/modifImg.png" style="width: auto;">
+                        <input type="file" name="imgGroupField" id="imgGroupField" onchange="document.getElementById('imgGroup').style.backgroundImage = 'url' +'(' + window.URL.createObjectURL(this.files[0]) + ')';" style="display:none">
+                    </label>
+                </div>
                 <div>
-                    <input type="text" name="" placeholder="Nom du salon">
+                    <input type="text" name="room-create__name" id="room-create__name" placeholder="Nom du salon">
                 </div>
                 <div>
                     <label for="">Description</label><br>
-                    <textarea name="" id="" maxlength="255" rows="3" cols="50" style="resize:none;" ></textarea>
+                    <textarea name="room-create__desc" maxlength="255" rows="3" cols="50" style="resize:none;" ></textarea>
                 </div>
                 <div id="private">
                     <label for="">Salon Privée</label>
-                    <input type="checkbox" id="checkPrivate">
-                    <input type="password" name="" id="fieldPrivate" placeholder="Mot de passe" disabled>   
-                    <i class="far fa-eye" id="seePswd" onclick="seePswd()"></i>
+                    <input type="checkbox" name="room-create__check" id="room-create__check">
+                    <input type="password" name="room-create__pswd" id="room-create__pswd" placeholder="Mot de passe" disabled>   
+                    <i class="far fa-eye" id="room-create__pswd-see" onclick="seePswd()"></i>
                 </div>
             </form>
             <ul>
                 <li><a href="#" onclick="popup()">ANNULER</a></li>
-                <li><a href="#" onclick="popup()">CRÉER</a></li>
+                <li><a href="#" onclick="controleChamps()">CRÉER</a></li>
             </ul>
         </div>
     </div>
+
+
+
+
+
+
+    <script>
+        function controleChamps() {
+            let error = {
+                "errorRoomName":0,
+                "errorRoomPswd":0
+            }
+            let roomName = document.getElementById('room-create__name').value;
+            let roomPswd = document.getElementById('room-create__pswd').value;
+            let roomCheck = document.getElementById('room-create__check').value;
+            const regexRoomName = /^[\w-]+$/;
+            let valid = true;
+        //Verif du champ nom
+            if (roomName == "") {
+                error["errorRoomName"] = "Le champ Nom du Salon est vide";
+                valid = false;
+            } else if (!regexRoomName.test(roomName)) {
+                error["errorRoomName"] = "Le champ 'Nom du Salon' comporte des caractères non autorisés";
+                valid = false;
+            } else if (roomName.length <= 2 || roomName.length > 17) {
+                error["errorRoomName"] = "Le Nom du Salon doit comporter de 2 à 16 caractères";
+                valid = false;
+            } else valid = true;
+        //Verif du mot de passe   
+            if (roomCheck.checked == true){
+                if (roomPswd == "") {
+                    error["errorRoomPswd"] = "Le champ Mot de passe est vide";
+                    valid = false;
+                } else if (roomPswd.length < 3 || roomPswd.length > 17) {
+                    error["errorRoomPswd"] = "Le Mot de passe doit comporter de 4 à 16 caractères";
+                    valid = false;
+                } else valid = true;
+            }
+            
+
+            if(valid){ 
+                return true;
+            } else {
+                for(x in error){
+                    if(error[x] != 0){
+                        document.getElementById(x).innerHTML = error[x];
+                     } else {
+                         document.getElementById(x).innerHTML = "";
+                     }
+                }
+                return false;
+            }
+        }
+    </script>
+
+
+
+    <script>
+    function create(){
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "ajax/create.php", true);
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log('ok');
+            }
+        };
+        let form = new FormData(document.getElementById("room-create"))
+        xhttp.send(form);
+    }
+    </script>
+
+
 
     <script>
         function popup() {
@@ -136,21 +216,27 @@
             pop.style.display == "block" ? pop.style.display = "none" : pop.style.display = "block"
         }
     </script>
+
+
+
     <script>
-        let checkPrivate = document.getElementById("checkPrivate");
-        let fieldPrivate = document.getElementById("fieldPrivate");
-            checkPrivate.addEventListener("change", function(event) {
+        let roomCheck = document.getElementById("room-create__check");
+        let roomPswd = document.getElementById("room-create__pswd");
+            roomCheck.addEventListener("change", function(event) {
                 if (event.target.checked) {
-                    fieldPrivate.disabled = false;
-                } else fieldPrivate.disabled = true;fieldPrivate.value = "";
+                    roomPswd.disabled = false;
+                } else roomPswd.disabled = true; roomPswd.value = "";
             }, false);
     </script>
+
+
+
     <script>
         function seePswd(){
-            let seePswd = document.getElementById("seePswd");
-            let fieldPrivate = document.getElementById("fieldPrivate");
-            fieldPrivate.type == "password" ? fieldPrivate.type  = "text" : fieldPrivate.type  = "password";
-            seePswd.className == "far fa-eye" ? seePswd.className  = "far fa-eye-slash" : seePswd.className = "far fa-eye";
+            let roomPswdSee = document.getElementById("room-create__pswd-see");
+            let roomPswd = document.getElementById("room-create__pswd");
+            roomPswd.type == "password" ? roomPswd.type  = "text" : roomPswd.type  = "password";
+            roomPswdSee.className == "far fa-eye" ? roomPswdSee.className  = "far fa-eye-slash" : roomPswdSee.className = "far fa-eye";
         }
     </script>
 </body>
