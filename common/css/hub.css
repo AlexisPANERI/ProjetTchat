@@ -35,11 +35,10 @@ main{
     height: 100vh;
 }
 
-
 /* Barre latéral */
-.sidebar{
+.sidebar-left{
     width: 22%;
-    border-right: 1px solid #c0c0c0;
+    border-right: 1px solid #dadada;
 }
 
 /* Profil */
@@ -50,54 +49,69 @@ main{
     flex-wrap: wrap;
     padding: 30px 0;
 }
-#avatar{
-    /* box-shadow: 0 1px 10px -5px rgb(0 0 0 / 20%); */
-    background: #fff;
+.profil__avatar{
     background-size: cover;
     background-position: center;
     border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    overflow: hidden;
+    width: 7.8125vw;
+    height: 7.8125vw;
 }
 
 /* Informations du profil */
-.profilInfos{
+.profil__infos{
     text-align: center;
 }
-.profilInfos b{
+.profil__infos b{
     color: rgb(34, 34, 34);
     font-weight: 800;
 }
 
-.profilBoutons{
+.profil-buttons{
     display: inline-block;
 }
-.profilBoutons a{
+.profil-buttons a{
     font-size: 0.9em;
 }
-#read{
+.profil-buttons__logout{
+    color: red;
+}
+.profil-buttons__read{
     text-decoration: none;
     color: black;
     padding-right: 10px;
 }
-#read:hover{
+.profil-buttons__read:hover{
     color: rgb(59, 59, 59);
 }
-#logout{
-    color: red;
-}
 
-/* Champ Recherche */
-.search {
+
+/* Salons */
+.room-manage{
+    padding: 25px 0;
+    box-shadow: 0 1px 10px -5px rgb(0 0 0 / 10%);;
+    box-shadow: black ;
+}
+.room-manage__searchBar {
     width: 100%;
     position: relative;
     display: flex;
     justify-content: center;
 }
-.searchTerm {
+.room-manage__searchBar__button {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #dadada;
+    background: transparent;
+    text-align: center;
+    color: #dadada;
+    border-radius:  20px 0 0 20px;
+    cursor: pointer;
+    border-right: none;
+    font-size: 20px;
+}
+.room-manage__searchBar__field {
     width: 80%;
-    border: 1px solid #c0c0c0;
+    border: 1px solid #dadada;
     border-right: none;
     padding: 5px;
     height: 20px;
@@ -105,52 +119,41 @@ main{
     border-radius: 0 20px 20px 0;
     outline: none;
 }
-.searchButton {
-    width: 32px;
-    height: 32px;
-    border: 1px solid #c0c0c0;
-    background: transparent;
-    text-align: center;
-    color: #c0c0c0;
-    border-radius:  20px 0 0 20px;
-    cursor: pointer;
-    border-right: none;
-    font-size: 20px;
-}
-
-/* Salons */
-.roomsSearch{
-    padding: 25px 0;
-    box-shadow: 0 1px 10px -5px rgb(0 0 0 / 20%);;
-    box-shadow: black ;
-}
-.roomsAdd {
+.room-manage-add {
     text-align: right;
 }
-.roomsAdd span {
+.room-manage-add span {
     cursor: pointer;
-    color: black;
+    color: rgb(36, 36, 36);
     padding-right: 20px;
+    font-size: 0.8em;
 }
-.rooms{
+
+/* Liste des salons */
+.room-list{
     overflow-y: scroll;
     height: 60vh;
 }
-.roomsBar{
+.room-list-bar{
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     align-items: center;
     padding: 10px 15px;
 }
-.roomsImg{
-    /* box-shadow: 0 1px 10px -5px rgb(0 0 0 / 20%); */
+.room-list-bar__img{
     background-size: cover;
     background-position: center;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    overflow: hidden;
+    width: 3vw;
+    height: 3vw;
 }
-.roomsLastMsg{
+
+.room-list-bar__infos b{
+    font-size: 0.9em;
+}
+.room-list-bar__infos-lastMsg{
+    font-size: 0.8em;
     width: 200px;
     overflow : hidden; 
     white-space : nowrap; 
@@ -158,48 +161,40 @@ main{
 }
 
 /* Description du salon */
-
-.roomInfos{
+.sidebar-right{
     position: absolute;
     top: 0;
     right: 0;
-    width: 25%;
+    width: 22%;
     height: 100vh;
-    border-left: 1px solid #c0c0c0;
+    padding: 0 1.5em;
+    border-left: 1px solid #dadada;
 }
-
-.roomImg{
+.room-info__img{
     background-image: url(../media/sources/imgGroup.jpg);
     background-size: cover;
     background-position: center;
     width: 90%;
     height: 200px;
 }
-
-.roomParticipants{
-    display: flex;
+hr{
+    margin: 1em 0;
+    background:  #dadada41;
+    height: 2px;
+    border: none;
 }
 
-.roomParticipant{
+.room-info-Participants{
+    display: flex;
+}
+.room-info-Participants__avatar{
     background-size: cover;
     background-position: center;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 1.5vw;
+    height: 1.5vw;
     overflow: hidden;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* POP UP */
@@ -212,21 +207,6 @@ main{
     width: 100%;
     background-color: rgba(94, 110, 141, 0.9);
 }
-.popupcontainer{
-    position: relative;
-    top: 13%;
-    left: 50%;
-    width: 600px;
-    transform: translateX(-50%);
-    background-color: white;
-    border-radius: .2rem .2rem 0 0;
-}
-.popupcontainer form {
-    width: 80%;
-    color: #8f9cb5;
-    margin: 0 auto;
-    padding: 2em 0;
-}
 #popup a {
     padding: 1.5em 0;
     text-decoration: none;
@@ -236,31 +216,52 @@ main{
 #popup li:hover{
     opacity: 0.9;
 }
-ul{
+.popup__container{
+    position: relative;
+    top: 10%;
+    left: 50%;
+    width: 600px;
+    transform: translateX(-50%);
+    background-color: white;
+    border-radius: .2rem .2rem 0 0;
+}
+.popup__container form {
+    width: 80%;
+    color: #8f9cb5;
+    margin: 0 auto;
+    padding: 2em 0;
+}
+.popup__container input[type="text"],input[type="password"],textarea{
+    font-size: 0.9em;
+    padding: 0.5em 0;
+    width: 100%; 
+}
+
+.alert-error{
+    text-align: center;
+    color: red;
+}
+
+#popup ul{
     list-style: none;
 }
-li{
+#popup li{
     float: left;
     width: 50%;
 }
-li a {
+#popup li a {
     text-align: center;
 }
-li:first-child a{
+#popup li:first-child a{
     background: #c62828 ;
     border-radius: 0 0 0 .25em;
 }
-li:last-child a{
+#popup li:last-child a{
     background: #3949ab ;
     border-radius: 0 0 .25em 0;
 }
-.popupcontainer input[type="text"],input[type="password"],textarea{
-    font-size: 0.9em;
-    padding: 0.5em 0;
-    width: 100%;
-    
-}
-input[type="text"]:disabled {
+
+#popup input[type="text"]:disabled {
     background: #ccc;
 }
 
@@ -273,11 +274,11 @@ input[type="text"]:disabled {
     height: 150px;
     overflow: hidden;
 }
-#output{
+#room-create__img-mask{
     opacity: 0;
 }
 
-#output:hover{
+#room-create__img-mask:hover{
     opacity:0.7;
 }
 
