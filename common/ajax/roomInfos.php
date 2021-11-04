@@ -6,7 +6,7 @@ $req->execute([$id]);
 $roomInfos = $req->fetch();
 
 echo "
-    <div id=\"$id\">
+    <div id=\"$id\" class=\"room-info\">
         <h2>$roomInfos->conv_name</h2>";
         echo "<div class='room-info__img' style='background-image: url(";
         if($roomInfos->conv_img){

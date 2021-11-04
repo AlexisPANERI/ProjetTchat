@@ -67,16 +67,18 @@ function test2(){
     }
 } 
 
-function link(id){
+
+function link(id) {
   var xhttp = new XMLHttpRequest();
   xhttp.open("POST", "ajax/send.php", true);
   xhttp.onreadystatechange = function () {
-if (this.readyState == 4 && this.status == 200) {
-  document.getElementById("message-send__field").value = "";
-}
-};
-let form = new FormData(document.getElementById(id))
-console.log(form)
-xhttp.send(form);
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("message-send__field").value = "";
+    }
+  };
+  let form = new FormData(document.getElementById(id));
+  console.log(form);
+  xhttp.send(form);
+  join(id);
   return false;
-} 
+}

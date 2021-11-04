@@ -37,7 +37,7 @@ main{
 /* Barre latéral */
 .sidebar-left{
     width: 22%;
-    background-color: #2c2f33;
+    background-color: #333;
 }
 /* Profil */
 .profil{
@@ -103,7 +103,7 @@ main{
 
 }
 .room-manage__searchBar__button {
-    background: #2c2f33;
+    background: #333;
     width: 32px;
     height: 32px;
     border: 1px solid white;
@@ -124,7 +124,7 @@ main{
     border-left: none;
     border-radius: 0 20px 20px 0;
     outline: none;
-    background: #2c2f33;
+    background: #333;
 }
 .room-manage-add {
     text-align: right;
@@ -138,8 +138,7 @@ main{
 /* Liste des salons */
 .room-list{
     height: 60vh;
-    overflow-y: scroll;
-    overflow-x:hidden;
+    overflow-y: auto;
 }
 .room-list-bar{
     display: flex;
@@ -149,6 +148,9 @@ main{
     padding: 10px 15px;
     border-bottom: 1px solid white;
     cursor: pointer;
+}
+.room-list-bar:hover{
+    background: rgba(255, 255, 255, 0.055);
 }
 .room-list-bar:hover .room-list-bar__img{
     transition: 0.4s;
@@ -177,15 +179,20 @@ main{
 
 /* Chat */
 .chat{
-    width: 52%;
+    width: 54%;
 }
 .chat__msg-area{
     height: 80vh;
-    overflow-x: scroll;
+    overflow-y: auto;
+}
+.chat__area-msg-mine{
+    display: flex;
+    justify-content: end;
+    margin: 20px 50px 20px 50px;
 }
 .chat__area-msg{
     display: flex;
-    margin: 10px 0 10px 50px;
+    margin: 20px 50px 20px 50px;
 }
 .chat__msg-area-avatar{
     background-position: center;
@@ -194,10 +201,18 @@ main{
     width: 3.5vw;
     height: 3.5vw;
 }
-.chat__msg-area-messages {
+.chat__msg-area-messages-mine {
     width: fit-content;
     max-width: 50%;
     background: #3E6DB5;
+    border-radius: 10px;
+    margin: 0 10px 0 0;
+    padding: 0 20px;
+}
+.chat__msg-area-messages{
+    width: fit-content;
+    max-width: 50%;
+    background: #558b2f;
     border-radius: 10px;
     margin: 0 0 0 10px;
     padding: 0 20px;
@@ -206,7 +221,7 @@ main{
     color: white;
 }
 .chat__msg-area-date{
-    color: #153463;
+    color: #dadada;
     text-align: right;
     font-size: 0.7em;
 }
@@ -248,9 +263,9 @@ main{
     right: 0;
     width: 24%;
     height: 100vh;
-    padding: 0 1.5em;
     border-left: 1px solid #dadada;
 }
+
 .room-info__img{
     background-size: cover;
     background-position: center;
@@ -288,7 +303,7 @@ hr{
     top: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(94, 110, 141, 0.9);
+    background-color: #dadadaee;
 }
 #popup a {
     padding: 1.5em 0;
