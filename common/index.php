@@ -53,7 +53,7 @@
         <!--Liste des salons -->
             <div class="room-list">
                 <?php 
-                    $req = $pdo->prepare("SELECT * FROM conversation");
+                    $req = $pdo->prepare("SELECT * FROM conversation ORDER BY conversation_id DESC");
                     $req->execute();
                     $rooms = $req->fetchAll();
                     foreach($rooms as $room) {
@@ -74,29 +74,21 @@
                 ?>
             </div>
         </div>
-    <!-- Discussion -->
+
+    <!-- Zone du tchat -->
         <div class="chat">
-            <div class="chat-discussion" id="message">
+
+            <div class="chat__msg-area" id="chat__msg-area">
+
             </div>
-            <div class="chat-area">
-                <form method="post" action="ajax/send.php" class="message-send">
-                    <input type="text" name="message-send__field" placeholder="Envoyer un message">
-                    <button type="submit"><i class="fas fa-paper-plane fa-lg"></i></button>
-                </form>
-                <!-- <i class="fas fa-plus-circle fa-lg"></i>          -->
+
+            <div class="chat__msg-send" id="chat__msg-send">
+
             </div>
         </div>
+
     <!-- Description du salon actuel -->
-        <div class="sidebar-right">
-            <?php
-                echo "<h2>$room->conv_name</h2>";
-                echo "<div class='room-info__img' style='background-image:url(\"./media/room-img/$room->conv_img\")'></div>";        
-                echo "<p>$room->conv_desc</p>";
-                echo "<hr/>";
-                echo "<div class='room-info-Participants'>
-                        <div class='room-info-Participants__avatar' style='background-image: url()'></div>
-                      </div>";
-            ?>
+        <div class="sidebar-right" id="sidebar-right">
         </div>
     </main>
     <!-- Création d'un salon -->

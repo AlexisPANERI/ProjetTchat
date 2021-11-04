@@ -31,12 +31,13 @@ main{
 }
 /* Variables */
 :root {
-    --secondary-grey : #dadada50;
+    --color-primary:#fff;
+    --color-secondary:#2c2f33;
 }
 /* Barre latéral */
 .sidebar-left{
     width: 22%;
-    border-right: 1px solid var(--secondary-grey);
+    background-color: #2c2f33;
 }
 /* Profil */
 .profil{
@@ -55,7 +56,7 @@ main{
     transition: 0.9s;
 }
 .profil__avatar:hover{
-    transform: scale(1.1);
+    transform: scale(1.05);
     transition: 0.4s;
 }
 /* Informations du profil */
@@ -63,7 +64,7 @@ main{
     text-align: center;
 }
 .profil__infos b{
-    color: rgb(34, 34, 34);
+    color: white;
     font-weight: 800;
 }
 
@@ -73,36 +74,41 @@ main{
 .profil-buttons a{
     font-size: 0.9em;
 }
-.profil-buttons__logout{
-    color: red;
-}
 .profil-buttons__read{
     text-decoration: none;
-    color: black;
+    color: white;
     padding-right: 10px;
 }
 .profil-buttons__read:hover{
-    color: rgb(59, 59, 59);
+    color: #d3d3d3;
 }
+.profil-buttons__logout{
+    color: red;
+}
+.profil-buttons__logout:hover{
+    color: #c40000;
+}
+
+
 /* Salons */
 .room-manage{
     padding: 25px 0;
-    box-shadow: 0 1px 10px -5px rgb(0 0 0 / 10%);;
-    box-shadow: black ;
 }
 .room-manage__searchBar {
     width: 100%;
     position: relative;
     display: flex;
     justify-content: center;
+
+
 }
 .room-manage__searchBar__button {
+    background: #2c2f33;
     width: 32px;
     height: 32px;
-    border: 1px solid var(--secondary-grey);
-    background: transparent;
+    border: 1px solid white;
     text-align: center;
-    color: var(--secondary-grey);
+    color: white;
     border-radius:  20px 0 0 20px;
     cursor: pointer;
     border-right: none;
@@ -110,20 +116,22 @@ main{
 }
 .room-manage__searchBar__field {
     width: 80%;
-    border: 1px solid var(--secondary-grey);
+    border: 1px solid white;
+    color: white;
     border-right: none;
     padding: 5px;
     height: 20px;
     border-left: none;
     border-radius: 0 20px 20px 0;
     outline: none;
+    background: #2c2f33;
 }
 .room-manage-add {
     text-align: right;
 }
 .room-manage-add span {
     cursor: pointer;
-    color: rgb(36, 36, 36);
+    color: white;
     padding-right: 20px;
     font-size: 0.8em;
 }
@@ -139,46 +147,74 @@ main{
     justify-content: space-evenly;
     align-items: center;
     padding: 10px 15px;
-    border-bottom: 2px solid var(--secondary-grey);
+    border-bottom: 1px solid white;
     cursor: pointer;
-    transition: 0.4s;
 }
-.room-list-bar:hover{
+.room-list-bar:hover .room-list-bar__img{
     transition: 0.4s;
-    transform: scale(1.2);
-    background: var(--secondary-grey);
+    border-radius: 40%;
 }
 .room-list-bar__img{
     background-size: cover;
     background-position: center;
     border-radius: 50%;
+    transition: 0.5s;
     width: 3vw;
     height: 3vw;
 }
 .room-list-bar-infos b{
+    color: white;
     font-size: 0.9em;
 }
 .room-list-bar-infos p{
+    color: white;
     font-size: 0.8em;
     width: 200px;
     overflow : hidden; 
     white-space : nowrap; 
     text-overflow : ellipsis;
 }
+
 /* Chat */
 .chat{
     width: 52%;
 }
-.chat-discussion{
+.chat__msg-area{
     height: 80vh;
     overflow-x: scroll;
 }
-.message-send{
+.chat__area-msg{
+    display: flex;
+    margin: 10px 0 10px 50px;
+}
+.chat__msg-area-avatar{
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    width: 3.5vw;
+    height: 3.5vw;
+}
+.chat__msg-area-messages {
+    width: fit-content;
+    max-width: 50%;
+    background: #3E6DB5;
+    border-radius: 10px;
+    margin: 0 0 0 10px;
+    padding: 0 20px;
+}
+.chat__msg-area-message{
+    color: white;
+}
+.chat__msg-area-date{
+    color: #153463;
+    text-align: right;
+    font-size: 0.7em;
+}
+.chat__msg-send{
     height: 20vh;
     text-align: center;
-    background: var(--secondary-grey);
 }
-.message-send input{
+.chat__msg-send input{
     height: 45px;
     width: 80%;
     border: 1px solid #dadada;
@@ -188,27 +224,18 @@ main{
     margin-top: 3em ;
     outline: none;
 }
-.message-send button{
+.chat__msg-send button{
     width: 55px;
     height: 45px;
     border-radius: 0 5px 5px 0;
     border: none;
     background: #333;
 }
-.message-send button:hover{
+.chat__msg-send button:hover{
     opacity: 0.8;
 }
-.message-send i{
+.chat__msg-send i{
     color: white
-}
-.discussion-message{
-    background: #3E6DB5;
-    color: white;
-    border-radius: 10px;
-    margin: 10px 0 10px 50px;
-    padding: 0 20px;
-    width: fit-content;
-    max-width: 50%;
 }
 
 
@@ -222,7 +249,7 @@ main{
     width: 24%;
     height: 100vh;
     padding: 0 1.5em;
-    border-left: 1px solid var(--secondary-grey);
+    border-left: 1px solid #dadada;
 }
 .room-info__img{
     background-size: cover;
@@ -232,7 +259,7 @@ main{
 }
 hr{
     margin: 1em 0;
-    background:var(--secondary-grey);
+    background: #dadada;
     height: 1px;
     border: none;
 }
@@ -247,6 +274,11 @@ hr{
     width: 1.5vw;
     height: 1.5vw;
     overflow: hidden;
+}
+
+.room-info-logout{
+    color: #c62828;
+    cursor: pointer;
 }
 /* POP UP */
 #popup {

@@ -58,4 +58,5 @@ function create(){
     };
     let form = new FormData(document.getElementById("room-create"))
     xhttp.send(form);
+    popup();
 }
