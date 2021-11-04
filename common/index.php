@@ -27,8 +27,7 @@
     <main>
         <div class="sidebar-left">
             <div class="profil">
-                <div class="profil__avatar" style="background-image: url(<?php if($user->avatar != null){echo "'".$path.$user->avatar."'";} else {echo "media/sources/avatar.png";}  ?>);">
-                </div>
+                <a href="read.php"><div class="profil__avatar" style="background-image: url(<?php if($user->avatar != null){echo "'".$path.$user->avatar."'";} else {echo "media/sources/avatar.png";}  ?>);"></div></a>
                     <div class="profil__infos">
                         <div>
                             <b><?php if ($user->pseudo == NULL){echo $_SESSION['auth']->username;}else{echo $user->pseudo;} ?></b>
@@ -39,7 +38,6 @@
                             </div>
                     </div>
             </div>
-
             <!-- Management des salons -->
             <div class="room-manage">
                 <div class="room-manage__searchBar">
@@ -52,32 +50,53 @@
                     <span onclick="popup()">Ajouter <i class="fas fa-plus-circle"></i></span>
                 </div>
             </div>
-            <!--Liste des salons -->
+        <!--Liste des salons -->
             <div class="room-list">
-                <div class="room-list-bar">
-                    <div class="room-list-bar__img" style="background-image:url(media/sources/imgGroup.jpg);"></div>
-                        <div class="room-list-bar__infos">
-                            <b>NOM DU SALON</b>
-                            <p class="room-list-bar__infos-lastMsg">Max: Salut à tous, vous allez bien ?</p>
-                        </div>
-                </div>
+                <?php 
+                    $req = $pdo->prepare("SELECT * FROM conversation");
+                    $req->execute();
+                    $rooms = $req->fetchAll();
+                    foreach($rooms as $room) {
+                        echo "<div class='room-list-bar' onclick='join($room->conversation_id)'>";
+                        echo "<div class='room-list-bar__img' style='background-image: url(";
+                         if($room->conv_img){
+                            echo "\"./media/room-img/$room->conv_img\"";
+                        }else {
+                            echo "\"./media/sources/imgGroup.jpg\"";
+                        };
+                        echo ")';></div>";
+                        echo "<div class='room-list-bar-infos'>
+                                    <b>$room->conv_name</b>
+                                    <p>$room->conv_desc</p>
+                                </div>
+                        </div>";
+                    }
+                ?>
             </div>
         </div>
-
-
-        <div class="chat"></div>
-
-
-        <div class="sidebar-right">
-            <div><h2>SCORD</h2></div>
-            <div class="room-info__img"></div>
-            <p>Je suis la description du salon, vous pouvez me modifier en cliquant sur moi</p>
-            <hr>
-            <div class="room-info-Participants">
-                <div class="room-info-Participants__avatar" style="background-image: url(<?php if($user->avatar != null){echo "'".$path.$user->avatar."'";} else {echo "media/sources/avatar.png";}  ?>);"></div>
-                <div class="room-info-Participants__avatar" style="background-image: url(<?php if($user->avatar != null){echo "'".$path.$user->avatar."'";} else {echo "media/sources/avatar.png";}  ?>);"></div>
-                <div class="room-info-Participants__avatar" style="background-image: url(<?php if($user->avatar != null){echo "'".$path.$user->avatar."'";} else {echo "media/sources/avatar.png";}  ?>);"></div>
+    <!-- Discussion -->
+        <div class="chat">
+            <div class="chat-discussion" id="message">
             </div>
+            <div class="chat-area">
+                <form method="post" action="ajax/send.php" class="message-send">
+                    <input type="text" name="message-send__field" placeholder="Envoyer un message">
+                    <button type="submit"><i class="fas fa-paper-plane fa-lg"></i></button>
+                </form>
+                <!-- <i class="fas fa-plus-circle fa-lg"></i>          -->
+            </div>
+        </div>
+    <!-- Description du salon actuel -->
+        <div class="sidebar-right">
+            <?php
+                echo "<h2>$room->conv_name</h2>";
+                echo "<div class='room-info__img' style='background-image:url(\"./media/room-img/$room->conv_img\")'></div>";        
+                echo "<p>$room->conv_desc</p>";
+                echo "<hr/>";
+                echo "<div class='room-info-Participants'>
+                        <div class='room-info-Participants__avatar' style='background-image: url()'></div>
+                      </div>";
+            ?>
         </div>
     </main>
     <!-- Création d'un salon -->
@@ -86,7 +105,7 @@
             <form action="ajax/create.php" method="POST" id="room-create">
                 <span  class="alert-error" id="alert-name"></span><br/>
                 <span class="alert-error" id="alert-pswd"></span>
-                <div name="room-create__img" id="room-create__img" style="background-image: url(<?php if($room->conv_img != null){echo "'".$path.$room->conv_img."'";} else {echo "media/sources/imgGroup.jpg";}?>);">
+                <div name="room-create__img" id="room-create__img" style="background-image: url(<?php echo "media/sources/imgGroup.jpg"; ?>);">
                     <label> 
                         <img id="room-create__img-mask" name="room-create__img-mask" src="media/sources/modifImg.png">
                         <input type="file" name="room-create__img-upload" id="room-create__img-upload" onchange="document.getElementById('room-create__img').style.backgroundImage = 'url' +'(' + window.URL.createObjectURL(this.files[0]) + ')';" style="display:none">
@@ -113,7 +132,6 @@
     <script src="js/popup.js"></script>
     <script src="js/create.js"></script>
     <script src="js/see.js"></script>
-
-
+    <script src="js/join.js"></script>
 </body>
 </html>

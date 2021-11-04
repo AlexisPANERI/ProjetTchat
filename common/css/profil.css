@@ -19,16 +19,17 @@ a{text-decoration: none;}
 fieldset {
     border: none;
     background: #fff;
-    width: 400px;
-    padding: 1rem;
+    width: 320px;
     border-radius: 5px;
 }
 
+
 span {color: black;}
 
-#avatar{
+/* Profil Read */
+/* Profil Avatar */
+.profil-read-avatar{
     background: #fff;
-    background-image: url(../media/sources/avatar.png);
     background-size: cover;
     background-position: center;
     margin: 0 auto;
@@ -37,113 +38,196 @@ span {color: black;}
     height: 200px;
     overflow: hidden;
 }
+.profil-read-avatar:hover{
+    transform: scale(1.02);
+}
 
-#avatarRead{
+/* Profil Read Infos*/
+
+
+.profil-read-infos {
+    text-align: center
+}
+
+
+
+.profil-read-infos strong{
+    display: block;
+    color: rgb(24, 24, 24);
+    font-size: 1.5em;
+}
+.profil-read__username{
+    display: block;
+    font-size: 1.1em;
+    color: rgb(99, 99, 99);
+    margin-bottom: 10px;
+}
+.profil-read-infos p{
+    font-weight: 600;
+    font-size: 1.2em;
+}
+.profil-read-details{
+    font-size: 0.9em;
+}
+
+.profil-read-infos__desc{
+    background: #dadada;
+}
+
+.profil-read-infos div:hover{
+    background: #dadada50;
+}
+
+/* Profil Read Boutons */
+.profil-read-buttons input[type="submit"],input[type="button"]{
+    border: none;
+    border-radius: 2px;
+    padding: 1em 1.5em;
+    margin: 1em auto;
+}
+.profil-read-buttons__logout{
+    color: #c62828;
+}
+.profil-read-buttons a {
+    text-align: center;
+    padding: 1.5em 0;
+    text-decoration: none;
+    display: block;
+}
+.profil-read-buttons li:hover{
+    opacity: 0.9;
+}
+.profil-read-buttons ul{
+    list-style: none;
+}
+.profil-read-buttons li{
+    float: left;
+    width: 50%;
+}
+.profil-read-buttons li:first-child a{
+    color: white;
+    background: #007BFF ;
+    border-radius: 0 0 0 .25em;
+}
+.profil-read-buttons li:last-child a{
+    color: white;
+    background: #28A745 ;
+    border-radius: 0 0 .25em 0;
+}
+
+
+
+/* Profil Update */
+.profil-update{
+    border: none;
+    background: #fff;
+    width: 500px;
+    border-radius: 5px;
+}
+/* Profil Update Avatar */
+.profil-update-avatar{
+    background: #fff;
+    background-size: cover;
+    background-position: center;
     margin: 0 auto;
     border-radius: 50%;
     width: 200px;
     height: 200px;
     overflow: hidden;
 }
-
-#avatar:hover{
-    transform: scale(1.02);
+.profil-update-avatar__img{
+    opacity: 0;
+}
+.profil-update-avatar__img:hover{
+    opacity:0.7;
 }
 
-.text{
+/* Profil Update Erreur */
+.profil-update-error{
+    color: #c62828;
+    font-size: 0.8em;
+}
+
+/* Profil Update Champs */
+.profil-update-infos span{
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+}
+.profil-update-infos input[type="text"],
+.profil-update-infos input[type="number"],
+.profil-update-infos select{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #dadada;
+}
+
+.profile-update-infos-old-gender{
+    display: flex;
+    justify-content: space-between;
+}
+.profile-update-infos-old-gender div{
+
+    width: 43%;
+}
+.profil-update-infos textarea{
+    resize: none;
+}
+.profil-update-infos input[type="password"]{
+    width: 100%;
+}
+.profil-update-infos{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     align-content: center;
     margin: 0 2em;
 }
-
-.text div {
+.profil-update-infos div {
     margin: 5px 0;
 }
 
-#output{
-    opacity: 0;
-}
 
-#output:hover{
-    opacity:0.7;
-}
-
-.boutons {
-    position: relative;
-    bottom: 0;
-}
-
-input,select{
-    float: right;
-    border: none;
-    border-bottom: 1px solid rgb(75, 72, 72);
+/* Profil Update Boutons */
+.profil-update-buttons__delete{
     text-align: center;
-    width: 185px;
+    cursor: pointer;
+    color: #c62828 ;
 }
-
-textarea{
-    resize: none;
-}
-
-/* CHAMPS DES BOUTONS */
-.input{
+.profil-update-buttons a{
     text-align: center;
+    padding: 1.5em 0;
+    text-decoration: none;
+    display: block;
 }
 
-input[type="button"]{
-    cursor: pointer;
-    background: #007BFF;;
-}
-
-input[type="submit"]{
-    cursor: pointer;
-    background: #28A745;
-}
-
-input[type="submit"],input[type="button"]{
-    float: none;
+.profil-update-buttons input{
+    width: 100%;
     border: none;
-    border-radius: 2px;
-    padding: 1em 1.5em;
-    margin: 1em auto;
-    color: white;
+    padding: 1.5em 0;
+    font-size: 16px;
 }
-
-input[type="submit"]:hover,input[type="button"]:hover{
+.profil-update-buttons li:hover{
     opacity: 0.9;
 }
-
-input[type="password"]{
-    float: none;
-    border: none;
-    border-bottom: 2px black solid;
-    border-radius: 2px;
-    padding: 1em 1.5em;
-    margin: 1em auto;
+.profil-update-buttons ul{
+    list-style: none;
+}
+.profil-update-buttons li{
+    float: left;
+    width: 50%;
+}
+.profil-update-buttons li:first-child a{
+    color: white;
+    background: #007BFF ;
+    border-radius: 0 0 0 .25em;
+}
+.profil-update-buttons li:last-child input{
+    color: white;
+    background: #28A745 ;
+    border-radius: 0 0 .25em 0;
 }
 
-
-.errorPHP {
-    color: red;
-}
-
-.alertError{
-    color: red;
-    padding-left: 5px;
-    margin-top: -10px;
-    font-size: 0.9em;
-}
-
-.delete{
-    cursor: pointer;
-    color: #c62828 ;
-}
-
-.logout{
-    color: #c62828 ;
-}
 
 /* POP UP COMPTE */
 
@@ -183,20 +267,20 @@ input[type="password"]{
 #popup li:hover{
     opacity: 0.9;
 }
-ul{
+#popup ul{
     list-style: none;
 }
-li{
+#popup li{
     float: left;
     width: 50%;
 }
 
-li:first-child a{
+#popup li:first-child a{
     background: #c62828 ;
     border-radius: 0 0 0 .25em;
 }
 
-li:last-child a{
+#popup li:last-child a{
     background: #3949ab ;
     border-radius: 0 0 .25em 0;
 }

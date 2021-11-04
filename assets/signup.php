@@ -73,7 +73,6 @@ require_once '../common/inc/db.php';
         }
 
         $token = str_random(60); //Genère un token de 60 caractères
-echo "ok";
         $req = $pdo->prepare("INSERT INTO users SET email = ?, username = ?,  pswd = ?, token_conf = ?,roles='membre'");
         $req->execute([$email, $username, $pswd, $token]);
         $req = $pdo->prepare('SELECT user_id FROM users where username = ?');
@@ -86,7 +85,6 @@ echo "ok";
             fclose($fp);
         $_SESSION['success'] = "Compte créer ✔ "."<a href=\"http://localhost/ConnexionInscription/assets/confirm.php?token=$token&id=$user_id\" style=\"color:white;\">Confirmer</a>";
         header("location: ../index.php");
-        echo "ok";
         die();
     } else {
         $_SESSION["error"] = "Veuillez remplir le formulaire"; // Message d'erreur

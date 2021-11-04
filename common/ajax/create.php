@@ -34,9 +34,23 @@ session_start();
             $roomPswd = $_POST['room-create__pswd']; 
             $roomPrivate = 1;
         }
+    // Image - Vérifie si l'image du fond est changé
+        if (!empty($_FILES["room-create__img-upload"])) {
+            $taillemax = 2097152;
+            $entensionsValides = array('jpg', 'jpeg', 'gif', 'png');
+            $extensionUpload = strtolower(substr(strrchr($_FILES['room-create__img-upload']['name'], '.'), 1));
+            if($_FILES['room-create__img-upload']['size'] <= $taillemax && in_array($extensionUpload, $entensionsValides)){
+                $roomBgImg = filter_var($_FILES["room-create__img-upload"]['name'], FILTER_SANITIZE_STRING);
+                $path = "../media/room-img/" .$roomBgImg;
+                $move = move_uploaded_file($_FILES['room-create__img-upload']['tmp_name'],$path);
+                var_dump($roomBgImg);
+            } else {
+                $roomBgImg = NULL;
+            }
+        } else $roomBgImg = NULL;
     // Relation avec la base de donnée
-        $req = $pdo->prepare("INSERT INTO conversation SET conv_name = ?, conv_private = ?,conv_pswd = ?,conv_desc=?");
-        $req->execute([$roomName,$roomPrivate,$roomPswd,$roomDesc]);
+        $req = $pdo->prepare("INSERT INTO conversation SET conv_name = ?, conv_private = ?,conv_pswd = ?,conv_desc=?, conv_img=?");
+        $req->execute([$roomName,$roomPrivate,$roomPswd,$roomDesc,$roomBgImg]);
         $req = $pdo->prepare("SELECT * FROM conversation WHERE conv_name = ?");
         $req->execute([$roomName]);
         $room = $req->fetch();
