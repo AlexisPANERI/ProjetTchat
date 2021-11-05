@@ -34,7 +34,7 @@
         <div class="formBx">
             <div class="form signinForm">
                 <form action="assets/login.php" method="POST">
-                    <h3>Connectez vous</h3>
+                    <h3>CONNEXION</h3>
                     <div class="fields">
                         <input type="text" name="username" placeholder="Nom d'utilisateur">
                         <i class="fa fa-user fa-lg"></i>

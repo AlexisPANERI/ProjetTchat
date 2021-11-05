@@ -10,13 +10,13 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: #193250;
-    transition: 0.5s;
+    height: 100vh;
+    background: #333;
+    transition: 0.6s;
 }
 
 body.active{
-    background:#ffc400;
+    background:#023246;
 }
 
 .container {
@@ -24,7 +24,6 @@ body.active{
     width: 800px;
     height: 500px;
     margin: 20px;
-   
 }
 
 .container2{
@@ -177,7 +176,7 @@ body.active{
 }
 
 .formBx .signinForm input[type="submit"]{
-    background: #ffc400;
+    background: #D4D4CE;
     border: none;
     color: #fff;
     cursor: pointer;

@@ -10,7 +10,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(94, 110, 141, 0.9);
+    background-color: #666;
     height: 100vh;
 }
 

@@ -78,7 +78,7 @@
     <!-- Zone du tchat -->
         <div class="chat">
 
-            <div class="chat__msg-area" id="chat__msg-area">
+            <div class="chat__area" id="chat__msg-area">
 
             </div>
 
@@ -121,6 +121,8 @@
             </ul>
         </div>
     </div>
+
+
     <script src="js/popup.js"></script>
     <script src="js/create.js"></script>
     <script src="js/see.js"></script>

@@ -103,28 +103,28 @@ main{
 
 }
 .room-manage__searchBar__button {
-    background: #333;
+    background: #444;
+    color: white;
+    border: none;
     width: 32px;
     height: 32px;
-    border: 1px solid white;
     text-align: center;
-    color: white;
     border-radius:  20px 0 0 20px;
     cursor: pointer;
     border-right: none;
     font-size: 20px;
 }
 .room-manage__searchBar__field {
-    width: 80%;
-    border: 1px solid white;
+    background: #444;
     color: white;
+    border: none;
+    width: 80%;
     border-right: none;
-    padding: 5px;
+    padding: 6px;
     height: 20px;
     border-left: none;
     border-radius: 0 20px 20px 0;
     outline: none;
-    background: #333;
 }
 .room-manage-add {
     text-align: right;
@@ -179,52 +179,73 @@ main{
 
 /* Chat */
 .chat{
+    background-color: #FBFBFB;
     width: 54%;
 }
-.chat__msg-area{
+    /* Zone des messages */
+.chat__area{
     height: 80vh;
     overflow-y: auto;
 }
-.chat__area-msg-mine{
-    display: flex;
-    justify-content: end;
-    margin: 20px 50px 20px 50px;
+.chat__area-msg-pseudo{
+    color: #666;
+    text-align: left;
+    font-size: 0.8em;
 }
-.chat__area-msg{
-    display: flex;
-    margin: 20px 50px 20px 50px;
+.chat__area-msg-date{
+    display: block;
+    color: #dadada;
+    text-align: right;
+    font-size: 0.7em;
 }
-.chat__msg-area-avatar{
+    /* Les photos de profil des messages */
+.chat__area-msg-avatar{
     background-position: center;
     background-size: cover;
     border-radius: 50%;
     width: 3.5vw;
     height: 3.5vw;
 }
-.chat__msg-area-messages-mine {
+.chat__area-msg-avatar:hover{
+    cursor: pointer;
+}
+
+    /* Les messages de l'utilisateur */
+.chat__area-msg-mine{
+    display: flex;
+    justify-content: end;
+    margin: 20px 50px 20px 50px;
+}
+.chat__area-msg-bubble-mine {
     width: fit-content;
     max-width: 50%;
     background: #3E6DB5;
-    border-radius: 10px;
+    border-radius: 4px;
     margin: 0 10px 0 0;
     padding: 0 20px;
 }
-.chat__msg-area-messages{
+.chat__area-msg-message-mine {
+    color: #fff;
+}
+
+    /* Le message des autres utilisateurs */
+.chat__area-msg{
+    display: flex;
+    margin: 20px 50px 20px 50px;
+}
+.chat__area-msg-bubble{
     width: fit-content;
     max-width: 50%;
-    background: #558b2f;
-    border-radius: 10px;
+    background: #ffffff;
+    border-radius: 4px;
     margin: 0 0 0 10px;
     padding: 0 20px;
 }
-.chat__msg-area-message{
-    color: white;
+.chat__area-msg-message{
+    color: black;
 }
-.chat__msg-area-date{
-    color: #dadada;
-    text-align: right;
-    font-size: 0.7em;
-}
+
+    /* La zone de l'envoie des messages */
 .chat__msg-send{
     height: 20vh;
     text-align: center;
@@ -253,7 +274,9 @@ main{
     color: white
 }
 
-
+.chat__msg-send .fa-paperclip{
+    color: #333;
+}
 
 /* Description du salon */
 .sidebar-right{
@@ -261,9 +284,9 @@ main{
     background: white;
     top: 0;
     right: 0;
-    width: 24%;
+    width: 23%;
     height: 100vh;
-    border-left: 1px solid #dadada;
+    padding: 0 1%;
 }
 
 .room-info__img{
@@ -373,6 +396,19 @@ hr{
 }
 #room-create__img-mask:hover{
     opacity: 0.7;
+}
+
+
+/* PROFIL MEMBER */
+
+#profil-read-member{
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #dadadaee;
 }
 
 
