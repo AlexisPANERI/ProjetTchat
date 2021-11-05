@@ -13,68 +13,64 @@
     <?php 
         session_start();
         if(isset($_SESSION['error'])){
-            echo "<div class=\"errorPHP\">".$_SESSION['error']."</div>";
+            echo "<div class=\"msg-alert-error\">".$_SESSION['error']."</div>";
             unset($_SESSION['error']);
         } else if(isset($_SESSION['success'])){
-            echo "<div class=\"successPHP\">".$_SESSION['success']."</div>";
+            echo "<div class=\"msg-alert-correct\">".$_SESSION['success']."</div>";
             unset($_SESSION['success']);
         }
     ?>
-    <div class="container">
-        <div class="container2">
-            <div class="box signin">
+    <div class="sign">
+        <div class="sign-switch">
+            <div class="sign-switch-signs signin">
                 <h2>Déjà Inscrit ?</h2>
-                <button class="signinBtn">Connectez vous</button>
+                <button class="sign-switch-signs__button-signin">Connectez vous</button>
             </div>
-            <div class="box signup">
+            <div class="sign-switch-signs signup">
                 <h2>Vous n'avez pas de compte ?</h2>
-                <button class="signupBtn">Inscrivez vous</button>
+                <button class="sign-switch-signs__button-signup">Inscrivez vous</button>
             </div>
         </div>
-        <div class="formBx">
-            <div class="form signinForm">
+        <div class="forms">
+            <div class="form form-signin">
                 <form action="assets/login.php" method="POST">
                     <h3>CONNEXION</h3>
-                    <div class="fields">
+                    <div class="form-field">
                         <input type="text" name="username" placeholder="Nom d'utilisateur">
                         <i class="fa fa-user fa-lg"></i>
                     </div>
-                    <div class="fields">
+                    <div class="form-field">
                         <input type="password" name="pswd" placeholder="Mot de passe">
                         <i class="fas fa-lock fa-lg"></i>                 
                     </div>
                     <input type="submit" value="Se connecter">
-                    <a href="assets/reset.php" class="forgot">Mot de passe oublié ?</a>
+                    <a href="assets/reset.php" class="form-forgotPswd">Mot de passe oublié ?</a>
                 </form>
             </div>
 
-            <div class="form signupForm">
+            <div class="form form-signup">
                 <form action="assets/signup.php" method="POST">
-                    <h3>Inscrivez vous</h3>
-                    <!-- <span class="consigne">Votre nom d'utilisateur doit être compris entre 4 à 16 caractères</span> -->
-                    <div class="fields">
+                    <h3>INSCRIPTION</h3>
+                    <div class="form-field">
                         <input id="inscr_nom" type="text" name="username" placeholder="Nom d'utilisateur">
                         <i class="fa fa-user fa-lg"></i>
                     </div>
-                    <span class="alertError" id="errorUsername"></span>                   
-                    <!-- <span class="consigne">Le format de votre email doit être conforme au format standard</span> -->
-                    <div class="fields">
+                    <span class="form-signup-alert-error" id="errorUsername"></span>                   
+                    <div class="form-field">
                         <input id="inscr_email" type="email" name="email" placeholder="Adresse Email">
                         <i class="fas fa-envelope fa-lg"></i>
                     </div>
-                    <span class="alertError" id="errorEmail"></span>
-                    <!-- <span class="consigne">Votre mot de passe doit être compris entre 8 à 16 caractères</span> -->
-                    <div class="fields">
+                    <span class="form-signup-alert-error" id="errorEmail"></span>
+                    <div class="form-field">
                         <input id="inscr_mdp" type="password" name="pswd" placeholder="Mot de passe">
                         <i class="fas fa-lock fa-lg"></i>
                     </div>
-                    <span class="alertError" id="errorPswd"></span>
-                    <!-- <span class="consigne">Le mot de passe doit être identique</span> -->
-                    <div class="fields">
+                    <span class="form-signup-alert-error" id="errorPswd"></span>
+                    <div class="form-field">
                         <input id="inscr_confirm" type="password" name="pswdConf" placeholder="Confirmer Mot de passe">
                         <i class="fas fa-lock fa-lg"></i>                        
                     </div>
-                    <span class="alertError" id="errorPswdConf"></span>
+                    <span class="form-signup-alert-error" id="errorPswdConf"></span>
                     <input type="text" id="validation" value="" name="validation" hidden>
                     <input type="submit" onclick="return controleChamps()" value="S'inscrire">
                 </form>
@@ -87,19 +83,19 @@
         // Script dédié à l'animation de l'interface inscription/connexion.
 
         //définition des constantes
-        const signinBtn = document.querySelector('.signinBtn');
-        const signupBtn = document.querySelector('.signupBtn');
-        const formBx = document.querySelector('.formBx');
+        const signinBtn = document.querySelector('.sign-switch-signs__button-signin');
+        const signupBtn = document.querySelector('.sign-switch-signs__button-signup');
+        const form = document.querySelector('.forms');
         const body = document.querySelector('body');
 
         // Animation
         signupBtn.onclick = function() {
-            formBx.classList.add('active')
+            form.classList.add('active')
             body.classList.add('active')
         }
 
         signinBtn.onclick = function() {
-            formBx.classList.remove('active')
+            form.classList.remove('active')
             body.classList.remove('active')
         }
     </script>

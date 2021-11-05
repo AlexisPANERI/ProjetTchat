@@ -16,17 +16,21 @@ body{
 }
 
 body.active{
-    background:#023246;
+    background:#666;
 }
 
-.container {
+
+
+/* Connexion & Inscription */
+.sign{
     position: relative;
     width: 800px;
     height: 500px;
     margin: 20px;
 }
 
-.container2{
+    /* Changement entre connexion et inscription */
+.sign-switch{
     position: absolute;
     display: flex;
     justify-content: center;
@@ -38,7 +42,8 @@ body.active{
     box-shadow: 0 5px 45px rgba(0,0,0,0.15);
 }
 
-.container2 .box{
+    /* Changement entre connexion et inscription */
+.sign-switch-signs{
     position: relative;
     width:50%;
     height: 100%;
@@ -49,14 +54,16 @@ body.active{
 
 }
 
-.container2 .box h2{
+    /* Changement entre connexion et inscription - titre */
+.sign-switch-signs h2{
     color: #fff;
     font-size: 1.2em;
     font-weight: 500;
     margin-bottom: 10px;
 }
 
-.container2 .box button{
+    /* Changement entre connexion et inscription - boutons */
+.sign-switch-signs button{
      cursor: pointer;
      padding: 10px 20px;
      background: #fff;
@@ -66,76 +73,127 @@ body.active{
      border: none;
 }
 
-.formBx.active{
+/* Formulaires */
+
+.forms{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: #fff;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 45px rgba(0,0,0,0.25);
+    border-radius: 10px;
+    transition: 0.5s ease-in-out;
+    overflow: hidden;
+}
+.forms.active{
     left:50%;
 }
+.forms h3{
+    text-align: center;
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+.forms input {
+    padding: 12px 40px; 
+    margin: 8px 0; 
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
 
-.formBx .form{
+/*Le form*/
+.form{
     position: absolute;
-    left: 50px;
+    left: 60px;
     padding: 25px;
     transition: 0.5s;
 }
-
-.formBx .signinForm{
-    transition-delay: 0.25s;
-}
-
-.formBx.active .signinForm{
-    left: -100%;
-    transition-delay: 0s;
-}
-
-.formBx .signupForm{
-    left: 100%;
-    transition-delay: 0s;
-}
-
-.formBx.active .signupForm{
-    left: 53px;
-    transition-delay: 0.25s;
-}
-
-.formBx .form form{
+form{
     width: 100%;
     display: flex;
     flex-direction: column;
 }
-
-/* .formBx .form form input{
-    margin-bottom: 10px;
-    padding: 10px;
-    outline: none;
-    font-size: 16px;
-    border: 1px solid #333;
-} */
-
-.formBx .form form .forgot{
-    color:#333;
+.form-field {
+    margin: 0 auto;
+    position: relative;
+}
+.form-field i{
+    position: absolute;
+    left: 7px;
+    top: 22px;
+    color: rgb(99, 99, 99);
+}
+input[type="text"],input[type="password"],input[type="email"]{
+    width: 150px;
+}
+input[type="submit"]{
+    width:230px
 }
 
-.alertError{
+/*Formulaire connexion*/
+.form-signin{
+    transition-delay: 0.25s;
+}
+    /*Formulaire connexion et active*/
+.forms.active .form-signin{
+    left: -100%;
+    transition-delay: 0s;
+}
+    /* Mot de passe oublié */
+.form-forgotPswd{
+    color:#333;
+}
+    /* Formulaire de connexion - boutton envoyer*/
+.form-signin input[type="submit"]{
+    background: #D4D4CE;
+    border: none;
+    color: #333;
+    cursor: pointer;
+}
+
+/*Formulaire inscription*/
+.forms .form-signup{
+    left: 100%;
+    transition-delay: 0s;
+}
+    /*Formulaire inscription et active*/
+.forms.active .form-signup{
+    left: 60px;
+    transition-delay: 0.25s;
+}
+    /* Formulaire d'inscription - boutton envoyer*/  
+.form-signup input[type="submit"]{
+    background: #333;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Message d'erreur et de validité */
+.form-signup-alert-error{
     color: red;
     padding-left: 5px;
     margin-top: -10px;
     font-size: 0.7em;
 }
-
-.consigne {
-    font-size: 0.8em;
-}
-
-.errorPHP {
+.msg-alert-error {
     position: absolute;
     top: 50px;
     color: red;
 }
-
-.successPHP{
+.msg-alert-correct{
     position: absolute;
     top: 50px;
     color: green;
 }
+
 
 /* RESET */
 
@@ -156,74 +214,11 @@ body.active{
     cursor: pointer;
 }
 
-/* -------------------FORM------------------- */
 
-.formBx{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 100%;
-    background: #fff;
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 5px 45px rgba(0,0,0,0.25);
-    border-radius: 10px;
-    transition: 0.5s ease-in-out;
-    overflow: hidden;
-}
-
-.formBx .signinForm input[type="submit"]{
-    background: #D4D4CE;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-}
-
-.formBx .signupForm input[type="submit"]{
-    background: #193250;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-}
-
-
-h3{
-    text-align: center;
-    font-size: 1.5em;
-    color: #333;
-    margin-bottom: 20px;
-    font-weight: 500;
-}
-
-/* Connexion & Inscription*/
-
-/* Champs */
-.signinForm input,.signupForm input {
-    padding: 12px 40px; 
-    margin: 8px 0; 
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-}
-
-.fields {
-    margin: 0 auto;
-    position: relative;
-}
-
-/* Champs icons */
-.fields i{
-    position: absolute;
-    left: 7px;
-    top: 22px;
-    color: rgb(99, 99, 99);
-}
 
 @media (max-width: 991px){
 
-    .container{
+    .sign{
         max-width: 400px;
         height: 650px;
         display: flex;
@@ -232,31 +227,31 @@ h3{
 
     }
 
-    .container .container2{
+    .sign .sign-switch{
         top: 0;
         height:100%;
         border-radius: 10px;
     }
 
-    .formBx{
+    .forms{
         width: 100%;
         height: 500px;
         top: 0;
         box-shadow: none;
     }
 
-    .container2 .box{
+    .sign-switch .sign-switch-signs{
         position: absolute;
         width: 100%;
         height: 150px;
         bottom: 0;
     }
 
-    .box.signin{
+    .sign-switch-signs.signin{
         top: 0;
     }
 
-    .formBx.active{
+    .forms.active{
         left:0;
         top: 150px;
     }
