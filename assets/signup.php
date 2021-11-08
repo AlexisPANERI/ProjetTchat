@@ -83,7 +83,7 @@ require_once '../common/inc/db.php';
         $fp = fopen('mail.txt','a+'); 
             fwrite($fp, "$email,$message\n");
             fclose($fp);
-        $_SESSION['success'] = "Compte créer ✔ "."<a href=\"http://localhost/ConnexionInscription/assets/confirm.php?token=$token&id=$user_id\" style=\"color:white;\">Confirmer</a>";
+        $_SESSION['success'] = "Compte créer ✔ "."<a href=\"http://localhost/ChatApp/assets/confirm.php?token=$token&id=$user_id\" style=\"color:white;\">Confirmer</a>";
         header("location: ../index.php");
         die();
     } else {

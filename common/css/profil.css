@@ -142,11 +142,7 @@ span {color: black;}
     opacity:0.7;
 }
 
-/* Profil Update Erreur */
-.profil-update-error{
-    color: #c62828;
-    font-size: 0.8em;
-}
+
 
 /* Profil Update Champs */
 .profil-update-infos span{
@@ -185,6 +181,12 @@ span {color: black;}
 }
 .profil-update-infos div {
     margin: 5px 0;
+}
+
+/* Profil Update Erreur */
+.profil-update-error{
+    color: #c62828;
+    font-size: 0.8em;
 }
 
 

@@ -184,7 +184,7 @@ $loc = '<select name="location">
                 </div>
                 <span>Description : </span>
                 <textarea  name="description" maxlength="255" rows="6" cols="30" ><?php echo $user->description ?></textarea>
-                <span class="profil-update-error" id="profil-update-error"></span>
+                <p class="profil-update-error" id="profil-update-error"></p>
                 <input type="password" name="password" id="pswd" placeholder="Mot de passe"><br/>
             </div>
             <div class="profil-update__buttons">
